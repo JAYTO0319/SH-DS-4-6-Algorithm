@@ -1,5 +1,5 @@
 
-Algorithm Study의 **"필독"** 
+AlgorithmStudy의 **"필독"** 
 
 반드시 읽어주세요!
 
