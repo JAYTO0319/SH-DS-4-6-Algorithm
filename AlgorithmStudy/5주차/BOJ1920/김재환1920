@@ -1,0 +1,41 @@
+import sys
+input = sys.stdin.readline
+
+# ---------------------- 입력 처리 ----------------------
+N = int(input().rstrip())
+A = list(map(int, input().split()))
+
+M = int(input().rstrip())
+queries = list(map(int, input().split()))
+
+# ---------------------- 왜 정렬 & 이분탐색인가? ----------------------
+# 문제: N, M 모두 최대 100,000 → 단순 for-in-for 탐색은 O(N*M) → 최대 1e10 → 시간초과
+# 따라서 A를 정렬한 뒤 이분탐색으로 존재 여부를 찾는 방식이 효율적이다.
+# 정렬: O(N log N), 각 질의 처리: O(log N) → 전체 O((N + M) log N) → 충분히 빠름
+
+A.sort()
+
+def binary_search(arr, target):
+    lo = 0
+    hi = len(arr) - 1
+
+    while lo <= hi:
+        mid = (lo + hi) // 2
+
+        if arr[mid] == target:
+            return True
+        elif arr[mid] < target:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+
+    return False
+
+# ---------------------- 질의 처리 & 출력 ----------------------
+# 존재하면 1, 없으면 0
+out = []
+for x in queries:
+    found = binary_search(A, x)
+    out.append("1" if found else "0")
+
+print("\n".join(out))
