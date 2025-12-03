@@ -1,0 +1,15 @@
+import sys
+
+n = int(sys.stdin.readline().strip())
+nums = sys.stdin.readline().strip()
+
+numlist = nums.split(" ")
+numset=set(numlist)
+
+m =  int(sys.stdin.readline().strip())
+checklist = (sys.stdin.readline().strip()).split(" ")
+for i in checklist:
+    if i in numset:
+        print(1)
+    else:
+        print(0)
