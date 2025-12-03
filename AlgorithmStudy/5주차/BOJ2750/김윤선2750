@@ -1,0 +1,12 @@
+import sys
+
+num = int(sys.stdin.readline())
+pn = set()
+nn = set()
+for _ in range(num):
+    n =  int(sys.stdin.readline().strip())
+    if n >= 0:
+        pn.add(n)
+    else: 
+        nn.add(n)
+print('\n'.join(map(str,sorted(nn, reverse=False)+sorted(pn))))
