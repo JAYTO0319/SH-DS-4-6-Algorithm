@@ -1,0 +1,7 @@
+n = int(input())
+num = set(map(int, input().split()))
+m = int(input())
+test = list(map(int, input().split()))
+
+for t in test:
+    print(1 if t in num else 0)
