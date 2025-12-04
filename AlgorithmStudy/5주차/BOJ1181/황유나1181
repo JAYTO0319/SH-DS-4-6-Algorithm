@@ -1,0 +1,8 @@
+n = int(input())
+word = set()
+for _ in range(n):
+    word.add(input())
+
+sorted_word = sorted(word, key=lambda x: (len(x), x))  # 길이 -> 사전순 정렬
+for sw in sorted_word:
+    print(sw)
