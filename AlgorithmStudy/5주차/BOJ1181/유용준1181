@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		String[] str = new String[n];
+//		
+//		List<String> list = new ArrayList<>();
+//		for (int i = 0; i < n; i++) {
+//			str[i] = br.readLine();
+//		}
+//		Arrays.sort(str);
+//
+//		int min = 50;
+//		for (int i = 0; i < str.length; i++) {
+//			if (str[i].length() < min) {
+//				min = str[i].length();
+//			}
+//		}
+//		
+//		while (list.size() != str.length) {
+//			for (int i = 0; i < str.length; i++) {
+//				if (min == str[i].length()) {
+//					list.add(str[i]);
+//				}
+//			}
+//			min++;
+//		}
+//		
+//		System.out.println(list.get(0));
+//
+//		for (int i = 1; i < list.size(); i++) {
+//		    if (!list.get(i).equals(list.get(i - 1))) {
+//		        System.out.println(list.get(i));
+//		    }
+//		}
+
+        //람다식으로 구현
+		for (int i = 0; i < n; i++) {
+			str[i] = br.readLine();
+		}
+		Arrays.sort(str, (a,b) -> {
+			if (a.length() != b.length()) {
+				return a.length() - b.length();
+			} else {
+				return a.compareTo(b);
+			}
+		});
+		
+		System.out.println(str[0]);
+		for (int i = 1; i < str.length; i++) {
+			if (!str[i].equals(str[i - 1])) {
+				System.out.println(str[i]);
+			}
+		}
+		
+	}
+
+}
