@@ -37,38 +37,38 @@ public class bj_20551 {
 	}
 	
     public static int BinarySearch(int key, int[] arr){
-	  int answer = -1;
-	  int low = 0;
-	  int high = arr.length - 1;
-	
-	  while (low <= high) {
-	
-	      int mid = (low + high) / 2;
-	
-	      if (arr[mid] < key){
-	          low = mid + 1;
-	      }
-	      else if (arr[mid] > key){
-	          high = mid - 1;
-	      }
-	      else {
-	    	  mid -= 1;
-	          
-	    	  if (mid<0 || arr[mid] != key) {
-	    		  answer = mid+1;
-	    		  break;
-	    	  }
-	    	  
-	    	  while(mid>=0 && arr[mid] == key) {
-	    		  mid-=1;
-	          }
-
-	    	  mid+=1;
-	    	  answer = mid;
-	    	  break;
-	      }
-	  }
-	  return answer;
+		int answer = -1;
+		int low = 0;
+		int high = arr.length - 1;
+		
+		while (low <= high) {
+		
+		  int mid = (low + high) / 2;
+		
+		  if (arr[mid] < key){
+			  low = mid + 1;
+		  }
+		  else if (arr[mid] > key){
+			  high = mid - 1;
+		  }
+		  else {
+			  mid -= 1;
+			  
+			  if (mid<0 || arr[mid] != key) {
+				  answer = mid+1;
+				  break;
+			  }
+			  
+			  while(mid>=0 && arr[mid] == key) {
+				  mid-=1;
+			  }
+		
+			  mid+=1;
+			  answer = mid;
+			  break;
+		  }
+		}
+		return answer;
 	}
 	
 }
