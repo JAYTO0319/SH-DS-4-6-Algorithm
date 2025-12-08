@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class Week5_4 {
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+
+		int[] arr = new int[n];
+
+		for (int i = 0; i < n; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+		}
+
+		Arrays.sort(arr);
+
+		StringBuilder sb = new StringBuilder();
+
+		while (m-- > 0) {
+			int target = Integer.parseInt(br.readLine());
+			int idx = Arrays.binarySearch(arr, target);
+			if (idx < 0) {
+				sb.append("-1\n");
+			} else {
+				while (idx >= 0 && arr[idx] == target) {
+					idx--;
+				}
+				sb.append(idx+1).append("\n");
+			}
+		}
+
+		System.out.println(sb);
+	}
+}
