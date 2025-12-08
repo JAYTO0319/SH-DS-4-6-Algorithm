@@ -1,4 +1,4 @@
-mport java.io.BufferedReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -48,6 +48,40 @@ public class bj_1920 {
             }
         }
         return answer;
+    }
+}
+
+---------------------------
+//Arrays.binarySearch 를 발견하게 되어 다시 작성
+    
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class bj_1920 {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer token = new StringTokenizer(br.readLine(), " ");
+        int[] arr = new int[N];
+        for (int i = 0 ; i < N ; i ++){
+            arr[i] = Integer.parseInt(token.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        int M = Integer.parseInt(br.readLine());
+        token = new StringTokenizer(br.readLine(), " ");
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < M; i ++){
+            sb.append(Arrays.binarySearch(arr, Integer.parseInt(token.nextToken()))<0?0:1).append("\n");
+        }
+        System.out.println(sb);
+        
     }
 }
 
