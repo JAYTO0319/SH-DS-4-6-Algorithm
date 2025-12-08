@@ -1,3 +1,7 @@
+#######################################################
+####################### 첫 풀 이 #######################
+#######################################################
+
 n, m = map(int, input().split())
 lectures = list(map(int, input().split()))
 
@@ -26,6 +30,44 @@ while start <= end:
         count += 1
     
     # 필요한 블루레이 개수가 갖고있는 블루레이 개수보다 작으면 O -> 저장하면서 최적의 해(최소값) 찾기
+    if count <= m:
+        result = mid
+        end = mid - 1
+    else:
+        start = mid + 1
+
+print(result)
+
+
+#######################################################
+####################### 간 소 화 #######################
+#######################################################
+
+n, m = map(int, input().split())
+lectures = list(map(int, input().split()))
+
+start = max(lectures)         # 가능한 블루레이 크기 중 최소값
+end = sum(lectures)           # 가능한 블루레이 크기 중 최대값
+result = 0                    # 최종 블루레이 크기의 최소값
+while start <= end:
+    mid = (start + end) // 2  # 블루레이 크기 후보
+    total = 0                 # 각 블루레이에 녹화된 동영상의 크기 (<= 블루레이 크기)
+    count = 0                 # 필요한 블루레이 개수
+    for leng in lectures:
+        total += leng
+        # 녹화된 동영상의 크기가 블루레이 크기를 초과한 경우
+        if total > mid:
+            total = leng      # 현재 동영상은 다음 블루레이에 녹화
+            count += 1
+        # 필요한 블루레이 개수가 갖고있는 블루레이를 초과하면 X
+        if count > m:
+            break
+    # 마지막 블루레이에 녹화된 동영상의 크기가 블루레이의 크기보다 작거나 같은 경우
+    if count <= m and total <= mid:
+        count += 1
+    
+    # 필요한 블루레이 개수가 갖고있는 블루레이 개수보다 작으면 O
+    # -> 저장하면서 최적의 해(최소값) 찾기
     if count <= m:
         result = mid
         end = mid - 1
