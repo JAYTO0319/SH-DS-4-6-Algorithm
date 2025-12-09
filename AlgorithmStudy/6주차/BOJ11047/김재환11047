@@ -1,1 +1,25 @@
-ASDF
+# 백준 11047 — 동전 0
+
+import sys
+input = sys.stdin.readline
+
+N, K = map(int, input().split())  # 동전 종류 수 N, 목표 금액 K
+coins = [int(input().rstrip()) for _ in range(N)]  # 각 동전 단위 (오름차순 입력)
+
+# 그리디를 쉽게 하려면 “큰 단위 → 작은 단위” 순으로 처리
+# coins가 오름차순이므로 reversed 순회 또는 sort(reverse=True) 해도 무방
+coins.reverse()
+
+count = 0  # 사용한 동전 개수 누적
+
+amount = K
+for coin in coins:
+    if amount == 0:
+        break
+
+    # 이 동전 단위를 가능한 한 많이 사용
+    use = amount // coin  # 해당 동전 단위로 쓸 수 있는 최대 개수
+    count += use
+    amount -= coin * use  # 남은 금액 갱신
+
+print(count)
