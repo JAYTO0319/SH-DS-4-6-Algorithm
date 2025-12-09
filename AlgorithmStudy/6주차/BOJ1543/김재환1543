@@ -1,1 +1,24 @@
-ZXCV
+# 1543번: 문서 검색
+
+import sys
+input = sys.stdin.readline
+
+document = input().rstrip("\n")   # 전체 문서 (공백 포함 가능)
+pattern = input().rstrip("\n")    # 찾으려는 단어 (pattern)
+
+doc_len = len(document)
+pat_len = len(pattern)
+
+i = 0        # 현재 검사 시작 인덱스
+count = 0    # 겹치지 않게 찾은 단어의 개수
+
+# 문서 끝에서 pattern 길이만큼 남은 구간까지만 검사
+while i <= doc_len - pat_len:
+    # 만약 이 위치에서 substring이 pattern 과 같다면
+    if document[i:i+pat_len] == pattern:
+        count += 1
+        i += pat_len   # 겹치지 않게, pattern 길이 만큼 점프
+    else:
+        i += 1         # 안 맞으면 한 칸만 앞으로
+
+print(count)
