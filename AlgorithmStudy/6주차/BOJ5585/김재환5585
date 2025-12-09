@@ -1,1 +1,22 @@
-QWER
+# 5585 번: 거스름돈
+
+# 1) 입력: 물건 값
+price = int(input().rstrip())
+
+# 2) 거스름돈 계산 (1000엔 지폐 냈으므로)
+change = 1000 - price
+
+# 3) 동전 단위들을 큰 것부터 리스트로 준비
+coins = [500, 100, 50, 10, 5, 1]
+
+answer = 0  # 반환할 동전 개수
+
+# 4) 그리디: 큰 동전부터 최대한 거슬러주기
+for coin in coins:
+    # coin 단위 동전을 몇 개 쓸 수 있는지
+    cnt = change // coin       # 몫: 쓸 수 있는 동전 개수
+    answer += cnt               # 동전 개수 누적
+    change %= coin              # 나머지 금액으로 업데이트
+
+# 5) 결과 출력
+print(answer)
