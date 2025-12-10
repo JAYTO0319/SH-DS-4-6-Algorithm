@@ -1,0 +1,19 @@
+#금액 리스트를 받아서 목표 금액을 만드는 데 필요한 동전의 최소 개수
+#금액 리스트를 받고, 목표 금액에 나누기를 하며 몫을 더하고 목표금액을 나머지로 설정
+
+import sys
+
+n,m =map(int, sys.stdin.readline().strip().split(" "))
+
+money_list =[]
+count = 0
+
+for i in range(n):
+    input_money =int(sys.stdin.readline().strip())
+    if(len(money_list) == 0 or input_money<=m):
+        money_list.append(input_money)
+
+for i in reversed(money_list):
+    count += m//i
+    m = m%i
+print(count)
