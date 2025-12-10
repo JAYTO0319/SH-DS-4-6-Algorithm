@@ -1,0 +1,14 @@
+import sys
+price = int(sys.stdin.readline().strip())
+#잔돈의 금액
+money = 1000-price
+#잔돈의 개수
+count = 0
+#잔돈으로 줄 수 있는 리스트
+change_list=[500, 100, 50, 10, 5, 1]
+
+for i in change_list:
+    count += money//i
+    money = money%i
+
+print(count)
