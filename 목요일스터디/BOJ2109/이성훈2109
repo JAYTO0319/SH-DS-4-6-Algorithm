@@ -1,0 +1,66 @@
+package algorithm.study;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+public class BOJ2109 {
+
+	static class PD {
+		public int p;
+		public int d;
+		
+		public PD(int p, int d) {
+			this.p = p;
+			this.d = d;
+		}
+	};
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		
+		if(n==0) {
+			System.out.println(0);
+			return;
+		}
+		
+		PD[] arr = new PD[n];
+		
+		for(int i = 0; i < n; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int p = Integer.parseInt(st.nextToken());
+			int d = Integer.parseInt(st.nextToken());
+			
+			arr[i] = new PD(p,d);
+		}
+		
+		Arrays.sort(arr, (Comparator<PD>)(a, b)->{
+			return a.d == b.d?
+					b.p - a.p:
+					b.d - a.d;
+		});
+
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>(Collections.reverseOrder());
+		int sum = 0;
+		int day = arr[0].d + 1;
+
+		int i = 0;
+		while(--day > 0) {
+			while(i<n && day == arr[i].d) {
+				pq.add(arr[i].p);
+				i++;
+			}
+			if(pq.isEmpty()) {
+				continue;
+			}
+			sum += pq.poll();
+		}
+		System.out.println(sum);
+	}
+}
