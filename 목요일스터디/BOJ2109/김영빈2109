@@ -1,0 +1,70 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	public static class M {
+		int p;
+		int d;
+		
+		public M(int p, int d) {
+			this.p = p;
+			this.d = d;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int N = Integer.parseInt(br.readLine());
+		
+		List<M> list = new ArrayList<>();
+		M m;
+		StringTokenizer st;
+		
+		for(int i=0;i<N;i++) {
+			st = new StringTokenizer(br.readLine());
+			m = new M(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken()));
+			list.add(m);
+		}
+		
+		list.sort((m1,m2)->{
+			if(m1.d != m2.d) {
+				return m1.d - m2.d;
+			} else {
+				return m2.p - m1.p;
+			}
+		});
+		
+		Queue<M> pQueue = new PriorityQueue<>((m1,m2)->{
+			return m1.p - m2.p;
+		});
+		
+		for(M ms : list) {
+			if(ms.d > pQueue.size()) {
+				pQueue.add(ms);
+			} else if (ms.d == pQueue.size()) {
+				M ms2 = pQueue.peek();
+				if(ms.p > ms2.p) {
+					pQueue.poll();
+					pQueue.add(ms);
+				} else {
+					continue;
+				}
+			}
+		}
+		
+		int sum = 0;
+		for(M ms : pQueue) {
+			sum += ms.p;
+		}
+		System.out.println(sum);
+	}
+}
