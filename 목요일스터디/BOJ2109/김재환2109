@@ -1,0 +1,22 @@
+import sys
+import heapq
+input = sys.stdin.readline
+
+n = int(input().rstrip())
+requests = [tuple(map(int, input().split())) for _ in range(n)]
+# 각 요청은 (p, d)
+
+# 마감일 기준으로 정렬 — d가 작은 순서
+# 요청에 맞춰 수강 가능한 강연들을 하나씩 고려할 수 있게
+requests.sort(key=lambda x: x[1])
+
+min_heap = []  # 지금까지 선택한 강연료들을 저장할 최소힙
+for p, d in requests:
+    heapq.heappush(min_heap, p)  # 이 강연을 우선 넣어본다
+    # 만약 요청된 강연 개수가 마감일을 넘었다면,
+    # 가장 보수가 적은 강연을 제거(포기)
+    if len(min_heap) > d:
+        heapq.heappop(min_heap)
+
+# 힙에 남은 강연들은 모두 실제로 할 수 있는 최적 선택들
+print(sum(min_heap))
