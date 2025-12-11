@@ -1,0 +1,27 @@
+import sys, heapq
+
+n = int(sys.stdin.readline().strip())
+
+#힙(최소힙)
+#일수를 어떻게 비교할가=> 튜플?
+
+
+#(일수, 강연비)
+lec_ls =[]
+#강연비 모음
+lec_p =[]
+
+for i in range(n):
+    p,d = map(int,sys.stdin.readline().strip().split(" "))
+    lec_ls.append((p,d))
+    
+#일자를 기준으로 정렬 
+lec_ls.sort(key=lambda x:x[1])
+
+for p, d in lec_ls:
+    heapq.heappush(lec_p,p)
+    #현재의 d가 초과되면 없앰
+    if len(lec_p)> d:
+        heapq.heappop(lec_p)
+ 
+print(sum(lec_p))
