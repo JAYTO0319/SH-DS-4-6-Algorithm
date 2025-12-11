@@ -1,0 +1,23 @@
+from heapq import heapify, heappush, heappop
+import sys
+
+input = sys.stdin.readline
+n = int(input())
+lec = [] # (day, pay)
+result = []
+heapify(result) # 최소힙
+
+for _ in range(n):
+    p, d = map(int, input().split())
+    lec.append((d, p))
+lec.sort(key = lambda x: (x[0], -x[1]))
+
+for d, p in lec:
+    if len(result) < d:
+        heappush(result, p)
+    else:
+        if p > result[0]:
+            heappop(result)
+            heappush(result, p)
+
+print(sum(result))
