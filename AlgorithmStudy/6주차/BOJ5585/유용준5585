@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		// 백준 5585 거스름돈
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int charge = 1000 - n;
+		int count = 0;
+		while (charge > 0) {
+			if (charge / 500 > 0) {
+				count++;
+				charge %= 500;
+			} 
+			if (charge / 100 > 0) {
+				count += charge / 100;
+				charge %= 100;
+			}
+			if (charge / 50 > 0) {
+				count++;
+				charge %= 50;
+			}
+			if (charge / 10 > 0) {
+				count += charge / 10;
+				charge %= 10;
+			}
+			if (charge / 5 > 0) {
+				count++;
+				charge %= 5;
+			}
+			if (charge / 1 > 0) {
+				count += charge / 1;
+				charge %= 1;
+			}
+		}
+		System.out.println(count);
+	}
+
+}
