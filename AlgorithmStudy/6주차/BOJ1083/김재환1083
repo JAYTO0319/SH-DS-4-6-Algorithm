@@ -1,0 +1,33 @@
+import sys
+input = sys.stdin.readline
+
+N = int(input().rstrip())
+A = list(map(int, input().split()))
+S = int(input().rstrip())
+
+# 배열 A: 서로 다른 정수, swap 제한 S
+# 목표: swap ≤ S 이내에서, 사전순으로 가장 뒤 (가능한 한 앞에 큰 숫자) 배열 만들기
+
+i = 0  # 현재 우리가 채울 위치 (0-based)
+while i < N and S > 0:
+    # 현재 위치 i 에 올 수 있는 후보는 i ~ min(N-1, i + S) 까지
+    max_val = A[i]
+    max_idx = i
+    limit = min(N - 1, i + S)
+
+    # 이 범위 내에서 가장 큰 값 찾기
+    for j in range(i + 1, limit + 1):
+        if A[j] > max_val:
+            max_val = A[j]
+            max_idx = j
+
+    # 만약 가장 큰 값이 i가 아니면
+    if max_idx != i:
+        # 그 값을 i 위치로 swap 해가며 끌어옴 — 인접 swap (bubble-like)
+        for j in range(max_idx, i, -1):
+            A[j], A[j - 1] = A[j - 1], A[j]
+        S -= (max_idx - i)  # 사용한 swap 횟수만큼 차감
+
+    i += 1  # 다음 위치로 이동
+
+print(*A)
